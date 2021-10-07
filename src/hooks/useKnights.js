@@ -23,6 +23,7 @@ export function useKnights(
   function knightMoves(endCellID, figureOnLand, knightColor) {
     if (!figureOnLand) {
       if (knightCheck(endCellID)) {
+        setMoveOrder(moveOrder === "white" ? "black" : "white");
         setCells(
           cells.map((item) => {
             return item.id === endCellID
@@ -32,7 +33,7 @@ export function useKnights(
               : item;
           })
         );
-        setMoveOrder(moveOrder === "white" ? "black" : "white");
+
       } else {
         setCurrentCell(null);
       }

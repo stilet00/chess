@@ -14,6 +14,7 @@ function SingleCell({
   onDragOver,
   onDragLeave,
   moveOrder,
+    style
 }) {
   let color;
   if (
@@ -26,20 +27,18 @@ function SingleCell({
   } else {
     color = id % 2 ? "brown" : "grey";
   }
-  const textColor = figure ? figure.color : null;
   let nameOfImage = figure
     ? figure.color +
       figure.name.split("")[0].toUpperCase() +
       figure.name.slice(1)
     : null;
-  let image =
-    nameOfImage === "whiteKnight"
+  let image = figure ? (nameOfImage === "whiteKnight"
       ? whiteKnight
       : nameOfImage === "blackKnight"
       ? blackKnight
       : nameOfImage === "whitePawn"
       ? whitePawn
-      : blackPawn;
+      : blackPawn) : null;
   return (
     <div
       id={id}
@@ -50,14 +49,14 @@ function SingleCell({
       onDragLeave={onDragLeave}
     >
       <div
-        className={!!figure && figure.color === moveOrder ? "figure" : "empty"}
+        className={!!figure && figure.color === moveOrder ? "figure-place full" : "figure-place empty"}
         draggable={!!figure && figure.color === moveOrder}
-        style={{ color: textColor }}
         onDragStart={(e) => onDragStart(e, id, figure)}
         onDrop={(e) => onDrop(e)}
         onDragEnd={onDragEnd}
+        style={{...style, backgroundImage: "url("+image+")"}}
+
       >
-        {figure ? <img src={image} /> : id}
       </div>
     </div>
   );

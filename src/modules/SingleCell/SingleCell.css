@@ -5,25 +5,23 @@
   width: 78px;
   height: 78px;
   border: 1px solid black;
-  border-right: none;
-}
-.single-cell:nth-child(8n) {
-  border-right: 1px solid black;
-}
+  border-right: none; }
+  .single-cell:nth-child(8n) {
+    border-right: 1px solid black; }
 
-.figure {
-  cursor: grab;
+.figure-place {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.figure img {
-  transition: 1s;
-  transition-delay: 1s;
-}
+  width: 100%;
+  height: 100%; }
+
+.full {
+  cursor: grab; }
+  .full:hover {
+    border: 1px solid blue; }
 
 .empty {
-  cursor: default;
-}
+  cursor: default; }
 
 /*# sourceMappingURL=SingleCell.css.map */

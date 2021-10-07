@@ -69,10 +69,11 @@ function Board(props) {
     <div className={"chess"}>
       <h1>Current move: {moveOrder}</h1>
       <TakenFigures side={"white"} figures={takenFigures.white} />
-      <div className={"board"}>
+      <div className={"board"} style={moveOrder === "black" ? {transform: "rotate(180deg)"} : null}>
         {cells.reverse().map((cell) => {
           return (
             <SingleCell
+                style={moveOrder === "black" ? {transform: "rotate(180deg)"} : null}
               {...cell}
               key={cell.id}
               onDragStart={dragStartHandler}
