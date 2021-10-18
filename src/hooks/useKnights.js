@@ -6,9 +6,8 @@ export function useKnights(
   setTakenFigures,
   takenFigures,
   setMoveOrder,
-  moveOrder
 ) {
-  function knightCheck(endCellID) {
+  function moveCheck(endCellID) {
     return (
       endCellID === currentCell.id - 10 ||
       endCellID === currentCell.id - 6 ||
@@ -20,10 +19,12 @@ export function useKnights(
       endCellID === currentCell.id + 15
     );
   }
-  function knightMoves(endCellID, figureOnLand, knightColor) {
+  function knightMoves(endCellID, color) {
+    const figureOnLand = cells.find((item) => item.id === endCellID).figure;
+    const oppositeColor = color === "white" ? "black" : "white";
     if (!figureOnLand) {
-      if (knightCheck(endCellID)) {
-        setMoveOrder(moveOrder === "white" ? "black" : "white");
+      if (moveCheck(endCellID)) {
+        setMoveOrder(oppositeColor);
         setCells(
           cells.map((item) => {
             return item.id === endCellID
@@ -36,13 +37,13 @@ export function useKnights(
       } else {
         setCurrentCell(null);
       }
-    } else if (figureOnLand.color === knightColor) {
+    } else if (figureOnLand.color === color) {
       alert("Can't take");
       setCurrentCell(null);
     } else {
       setTakenFigures({
         ...takenFigures,
-        [knightColor]: [...takenFigures.white, figureOnLand],
+        [color]: [...takenFigures.white, figureOnLand],
       });
       setCells(
         cells.map((item) => {
@@ -53,7 +54,7 @@ export function useKnights(
             : item;
         })
       );
-      setMoveOrder(moveOrder === "white" ? "black" : "white");
+      setMoveOrder(oppositeColor);
     }
   }
 

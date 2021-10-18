@@ -13,7 +13,7 @@ function Board(props) {
     black: [],
   });
   const [moveOrder, setMoveOrder] = useState("white");
-  const { whitePawlMoves, blackPawlMoves } = usePawls(
+  const { pawlMoves } = usePawls(
     cells,
     setCells,
     currentCell,
@@ -21,7 +21,6 @@ function Board(props) {
     setTakenFigures,
     takenFigures,
     setMoveOrder,
-    moveOrder
   );
   const { knightMoves } = useKnights(
     cells,
@@ -53,15 +52,13 @@ function Board(props) {
   function dragDropHandler(e) {
     e.preventDefault();
   }
-  function onBoardDrop(e, id, figure) {
+  function onBoardDrop(e, id) {
     e.preventDefault();
     e.target.style.opacity = "1";
     if (currentCell.figure.name === "knight") {
-      knightMoves(id, figure, currentCell.figure.color);
-    } else if (currentCell.figure.color === "white") {
-      whitePawlMoves(id);
+      knightMoves(id, currentCell.figure.color);
     } else {
-      blackPawlMoves(id);
+      pawlMoves(id, currentCell.figure.color);
     }
   }
 

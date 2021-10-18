@@ -46,7 +46,7 @@ function Cell({
       id={id}
       style={{ background: color }}
       className={"single-cell"}
-      onDrop={(e) => onBoardDrop(e, id, figure)}
+      onDrop={(e) => onBoardDrop(e, id)}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
     >
@@ -61,7 +61,7 @@ function Cell({
         onDrop={(e) => onDrop(e)}
         onDragEnd={onDragEnd}
         style={{ ...style, backgroundImage: "url(" + image + ")" }}
-      ></div>
+      >{id}</div>
     </div>
   );
 }
