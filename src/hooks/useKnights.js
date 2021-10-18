@@ -41,6 +41,7 @@ export function useKnights(
           })
         );
       } else {
+        alert("Wrong move");
         setCurrentCell(null);
       }
     } else if (figureOnLand.color === color) {

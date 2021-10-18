@@ -34,7 +34,6 @@ function Board(props) {
     setTakenFigures,
     takenFigures,
     setMoveOrder,
-    moveOrder,
     coordinates,
     setCoordinates
   );
