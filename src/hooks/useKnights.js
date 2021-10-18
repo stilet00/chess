@@ -33,7 +33,6 @@ export function useKnights(
               : item;
           })
         );
-
       } else {
         setCurrentCell(null);
       }

@@ -1,10 +1,10 @@
 import React from "react";
-import "./SingleCell.css";
+import "./Cell.css";
 import whitePawn from "../../images/whitePawn.png";
 import blackPawn from "../../images/blackPawn.png";
 import whiteKnight from "../../images/whiteKnight.png";
 import blackKnight from "../../images/blackKnight.png";
-function SingleCell({
+function Cell({
   id,
   figure,
   onDragStart,
@@ -14,7 +14,7 @@ function SingleCell({
   onDragOver,
   onDragLeave,
   moveOrder,
-    style
+  style,
 }) {
   let color;
   if (
@@ -32,13 +32,15 @@ function SingleCell({
       figure.name.split("")[0].toUpperCase() +
       figure.name.slice(1)
     : null;
-  let image = figure ? (nameOfImage === "whiteKnight"
+  let image = figure
+    ? nameOfImage === "whiteKnight"
       ? whiteKnight
       : nameOfImage === "blackKnight"
       ? blackKnight
       : nameOfImage === "whitePawn"
       ? whitePawn
-      : blackPawn) : null;
+      : blackPawn
+    : null;
   return (
     <div
       id={id}
@@ -49,17 +51,19 @@ function SingleCell({
       onDragLeave={onDragLeave}
     >
       <div
-        className={!!figure && figure.color === moveOrder ? "figure-place full" : "figure-place empty"}
+        className={
+          !!figure && figure.color === moveOrder
+            ? "figure-place full"
+            : "figure-place empty"
+        }
         draggable={!!figure && figure.color === moveOrder}
         onDragStart={(e) => onDragStart(e, id, figure)}
         onDrop={(e) => onDrop(e)}
         onDragEnd={onDragEnd}
-        style={{...style, backgroundImage: "url("+image+")"}}
-
-      >
-      </div>
+        style={{ ...style, backgroundImage: "url(" + image + ")" }}
+      ></div>
     </div>
   );
 }
 
-export default SingleCell;
+export default Cell;
