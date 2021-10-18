@@ -6,6 +6,8 @@ export function useKnights(
   setTakenFigures,
   takenFigures,
   setMoveOrder,
+  coordinates,
+  setCoordinates
 ) {
   function moveCheck(endCellID) {
     return (
@@ -25,6 +27,10 @@ export function useKnights(
     if (!figureOnLand) {
       if (moveCheck(endCellID)) {
         setMoveOrder(oppositeColor);
+        setCoordinates({
+          letters: coordinates.letters.reverse(),
+          numbers: coordinates.numbers.reverse(),
+        });
         setCells(
           cells.map((item) => {
             return item.id === endCellID
@@ -55,6 +61,10 @@ export function useKnights(
         })
       );
       setMoveOrder(oppositeColor);
+      setCoordinates({
+        letters: coordinates.letters.reverse(),
+        numbers: coordinates.numbers.reverse(),
+      });
     }
   }
 

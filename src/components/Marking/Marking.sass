@@ -1,0 +1,31 @@
+.mark-line
+  display: flex
+  background: lightgray
+  justify-content: space-evenly
+  margin: 5px
+  border: 1px solid black
+  border-radius: 5px
+  transition-duration: 1s
+.mark
+  font-weight: bold
+  font-size: 25px
+  display: flex
+  justify-content: center
+  align-items: center
+.horizontal
+  height: 55px
+  margin-left: 75px
+  .mark
+    width: 78px
+    border-right: 1px solid black
+    &:last-child
+      border: none
+.vertical
+  flex-direction: column
+  width: 55px
+  max-height: 638px
+  .mark
+    height: 78px
+    border-bottom: 1px solid black
+    &:last-child
+      border: none

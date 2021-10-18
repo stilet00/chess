@@ -6,19 +6,24 @@ export function usePawls(
   setTakenFigures,
   takenFigures,
   setMoveOrder,
+  coordinates,
+  setCoordinates
 ) {
   function pawlMoves(endCellID, color) {
-
     const figureOnLand = cells.find((item) => item.id === endCellID).figure;
     const oppositeColor = color === "white" ? "black" : "white";
-    const attackCheck = color === "white" ? currentCell.id - 9 === endCellID || currentCell.id - 7 === endCellID : currentCell.id + 9 === endCellID || currentCell.id + 7 === endCellID;
-    const moveCheck = color === "white" ? currentCell.id - 8 : currentCell.id + 8;
-    const bigMoveCheck = color === "white" ? currentCell.id - 16 === endCellID : currentCell.id + 16 === endCellID;
+    const attackCheck =
+      color === "white"
+        ? currentCell.id - 9 === endCellID || currentCell.id - 7 === endCellID
+        : currentCell.id + 9 === endCellID || currentCell.id + 7 === endCellID;
+    const moveCheck =
+      color === "white" ? currentCell.id - 8 : currentCell.id + 8;
+    const bigMoveCheck =
+      color === "white"
+        ? currentCell.id - 16 === endCellID
+        : currentCell.id + 16 === endCellID;
     if (figureOnLand) {
-      if (
-        figureOnLand.color !== color &&
-        (attackCheck)
-      ) {
+      if (figureOnLand.color !== color && attackCheck) {
         setCells(
           cells.map((item) => {
             return item.id === endCellID
@@ -33,12 +38,15 @@ export function usePawls(
           [color]: [...takenFigures[color], figureOnLand],
         });
         setMoveOrder(oppositeColor);
+        setCoordinates({
+          letters: coordinates.letters.reverse(),
+          numbers: coordinates.numbers.reverse(),
+        });
       } else {
-
         alert("Can't take");
       }
     } else if (
-        moveCheck === endCellID ||
+      moveCheck === endCellID ||
       (bigMoveCheck &&
         !currentCell.figure.isTouched &&
         !cells.find((item) => item.id === moveCheck).figure)
@@ -53,6 +61,10 @@ export function usePawls(
         })
       );
       setMoveOrder(oppositeColor);
+      setCoordinates({
+        letters: coordinates.letters.reverse(),
+        numbers: coordinates.numbers.reverse(),
+      });
     } else {
       alert("Wrong move");
       setCurrentCell(null);

@@ -41,7 +41,6 @@ export const CellFields = [
   { id: 40, figure: null },
   { id: 41, figure: null },
   { id: 42, figure: null },
-  // { id: 43, figure: { name: "pawn", color: "black", isTouched: true } },
   { id: 43, figure: null },
   { id: 44, figure: { name: "pawn", color: "white", isTouched: true } },
   { id: 45, figure: null },
@@ -65,3 +64,7 @@ export const CellFields = [
   { id: 63, figure: null },
   { id: 64, figure: null },
 ];
+export const COORDINATES = {
+  letters: ["a", "b", "c", "d", "e", "f", "g", "h"],
+  numbers: ["8", "7", "6", "5", "4", "3", "2", "1"],
+};

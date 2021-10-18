@@ -61,7 +61,7 @@ function Cell({
         onDrop={(e) => onDrop(e)}
         onDragEnd={onDragEnd}
         style={{ ...style, backgroundImage: "url(" + image + ")" }}
-      >{id}</div>
+      ></div>
     </div>
   );
 }
