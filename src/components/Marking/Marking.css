@@ -1,12 +1,11 @@
 .mark-line {
-  display: flex;
-  background: lightgray;
+  display: grid;
+  grid-gap: 1px;
+  background: #fcfcfc;
   justify-content: space-evenly;
-  margin: 5px;
-  border: 1px solid black;
+  border: 5px solid;
   border-radius: 5px;
-  transition-duration: 1s;
-}
+  transition-duration: 1s; }
 
 .mark {
   font-weight: bold;
@@ -14,31 +13,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  background: #000000;
+  color: #fcfcfc; }
 
 .horizontal {
-  height: 55px;
-  margin-left: 75px;
-}
-.horizontal .mark {
-  width: 78px;
-  border-right: 1px solid black;
-}
-.horizontal .mark:last-child {
-  border: none;
-}
+  grid-template-columns: repeat(8, 81px);
+  margin-left: 41px;
+  margin-top: 5px;
+  height: 27px; }
 
 .vertical {
-  flex-direction: column;
-  width: 55px;
-  max-height: 638px;
-}
-.vertical .mark {
-  height: 78px;
-  border-bottom: 1px solid black;
-}
-.vertical .mark:last-child {
-  border: none;
-}
+  grid-template-rows: repeat(8, 81px);
+  margin-right: 5px;
+  width: 27px; }
+  .vertical .mark {
+    width: 27px; }
 
 /*# sourceMappingURL=Marking.css.map */
