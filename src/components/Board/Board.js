@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Board.css";
 import { CellFields, COORDINATES } from "../../constants/constants";
 import Cell from "../Cell/Cell";

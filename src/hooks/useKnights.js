@@ -1,3 +1,5 @@
+import { getOppositeColor } from "./useOppositeColor";
+
 export function useKnights(
   cells,
   setCells,
@@ -23,7 +25,7 @@ export function useKnights(
   }
   function knightMoves(endCellID, color) {
     const figureOnLand = cells.find((item) => item.id === endCellID).figure;
-    const oppositeColor = color === "white" ? "black" : "white";
+    const oppositeColor = getOppositeColor(color)
     if (!figureOnLand) {
       if (moveCheck(endCellID)) {
         setMoveOrder(oppositeColor);
@@ -50,7 +52,7 @@ export function useKnights(
     } else {
       setTakenFigures({
         ...takenFigures,
-        [color]: [...takenFigures.white, figureOnLand],
+        [color]: [...takenFigures[color], figureOnLand],
       });
       setCells(
         cells.map((item) => {

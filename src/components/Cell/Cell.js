@@ -1,9 +1,7 @@
 import React from "react";
 import "./Cell.css";
-import whitePawn from "../../images/whitePawn.svg";
-import blackPawn from "../../images/blackPawn.svg";
-import whiteKnight from "../../images/whiteKnight.svg";
-import blackKnight from "../../images/blackKnight.svg";
+import Knight from "../FiguresImages/Knight/Knight";
+import Pawn from "../FiguresImages/Pawn/Pawn";
 function Cell({
   id,
   figure,
@@ -27,20 +25,7 @@ function Cell({
   } else {
     color = id % 2 ? "brown" : "grey";
   }
-  let nameOfImage = figure
-    ? figure.color +
-      figure.name.split("")[0].toUpperCase() +
-      figure.name.slice(1)
-    : null;
-  let image = figure
-    ? nameOfImage === "whiteKnight"
-      ? whiteKnight
-      : nameOfImage === "blackKnight"
-      ? blackKnight
-      : nameOfImage === "whitePawn"
-      ? whitePawn
-      : blackPawn
-    : null;
+  let figureImage = figure ? figure.name === "knight" ? <Knight color={figure.color} /> : <Pawn color={figure.color} /> : null;
   return (
     <div
       id={id}
@@ -60,8 +45,9 @@ function Cell({
         onDragStart={(e) => onDragStart(e, id, figure)}
         onDrop={(e) => onDrop(e)}
         onDragEnd={onDragEnd}
-        style={{ ...style, backgroundImage: "url(" + image + ")" }}
+        style={{ ...style }}
       >
+        {figureImage}
       </div>
     </div>
   );
