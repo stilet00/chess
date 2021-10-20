@@ -7,13 +7,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-size: cover;
   width: 100%;
   height: 100%; }
 
 .full {
   cursor: grab; }
   .full:hover {
-    border: 1px solid blue; }
+    background-color: rgba(252, 252, 252, 0.5); }
 
 .empty {
   cursor: default; }

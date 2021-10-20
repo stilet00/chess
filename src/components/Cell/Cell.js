@@ -1,9 +1,9 @@
 import React from "react";
 import "./Cell.css";
-import whitePawn from "../../images/whitePawn.png";
-import blackPawn from "../../images/blackPawn.png";
-import whiteKnight from "../../images/whiteKnight.png";
-import blackKnight from "../../images/blackKnight.png";
+import whitePawn from "../../images/whitePawn.svg";
+import blackPawn from "../../images/blackPawn.svg";
+import whiteKnight from "../../images/whiteKnight.svg";
+import blackKnight from "../../images/blackKnight.svg";
 function Cell({
   id,
   figure,
@@ -61,7 +61,8 @@ function Cell({
         onDrop={(e) => onDrop(e)}
         onDragEnd={onDragEnd}
         style={{ ...style, backgroundImage: "url(" + image + ")" }}
-      ></div>
+      >
+      </div>
     </div>
   );
 }
