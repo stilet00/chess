@@ -25,7 +25,7 @@ export function useKnights(
   }
   function knightMoves(endCellID, color) {
     const figureOnLand = cells.find((item) => item.id === endCellID).figure;
-    const oppositeColor = getOppositeColor(color)
+    const oppositeColor = getOppositeColor(color);
     if (!figureOnLand) {
       if (moveCheck(endCellID)) {
         setMoveOrder(oppositeColor);

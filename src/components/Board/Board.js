@@ -74,15 +74,13 @@ function Board(props) {
       <div className="border">
         <Marking direction={"vertical"} inner={coordinates.numbers.reverse()} />
         <div
-          className={"board"}
-          style={moveOrder === "black" ? { transform: "rotate(180deg)" } : null}
+          className={
+            moveOrder === "white" ? "board static-board" : "board rotated-board"
+          }
         >
           {cells.reverse().map((cell) => {
             return (
               <Cell
-                style={
-                  moveOrder === "black" ? { transform: "rotate(180deg)" } : null
-                }
                 {...cell}
                 key={cell.id}
                 onDragStart={dragStartHandler}

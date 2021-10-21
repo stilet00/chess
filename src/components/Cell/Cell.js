@@ -12,7 +12,6 @@ function Cell({
   onDragOver,
   onDragLeave,
   moveOrder,
-  style,
 }) {
   let color;
   if (
@@ -25,7 +24,13 @@ function Cell({
   } else {
     color = id % 2 ? "brown" : "grey";
   }
-  let figureImage = figure ? figure.name === "knight" ? <Knight color={figure.color} /> : <Pawn color={figure.color} /> : null;
+  let figureImage = figure ? (
+    figure.name === "knight" ? (
+      <Knight color={figure.color} />
+    ) : (
+      <Pawn color={figure.color} />
+    )
+  ) : null;
   return (
     <div
       id={id}
@@ -45,7 +50,7 @@ function Cell({
         onDragStart={(e) => onDragStart(e, id, figure)}
         onDrop={(e) => onDrop(e)}
         onDragEnd={onDragEnd}
-        style={{ ...style }}
+        style={moveOrder === "black" ? { transform: "rotate(180deg)" } : null}
       >
         {figureImage}
       </div>

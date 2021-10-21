@@ -13,7 +13,7 @@ export function usePawls(
 ) {
   function pawlMoves(endCellID, color) {
     const figureOnLand = cells.find((item) => item.id === endCellID).figure;
-    const oppositeColor = getOppositeColor(color)
+    const oppositeColor = getOppositeColor(color);
     const attackCheck =
       color === "white"
         ? currentCell.id - 9 === endCellID || currentCell.id - 7 === endCellID

@@ -1,22 +1,28 @@
 .single-cell {
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+}
 
 .figure-place {
   display: flex;
   align-items: center;
   justify-content: center;
   background-size: cover;
+  box-sizing: border-box;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+}
 
 .full {
-  cursor: grab; }
-  .full:hover {
-    background-color: rgba(252, 252, 252, 0.5); }
+  cursor: grab;
+}
+.full:hover {
+  background-color: rgba(252, 252, 252, 0.5);
+}
 
 .empty {
-  cursor: default; }
+  cursor: default;
+}
 
 /*# sourceMappingURL=Cell.css.map */

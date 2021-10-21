@@ -5,7 +5,8 @@
   justify-content: space-evenly;
   border: 5px solid;
   border-radius: 5px;
-  transition-duration: 1s; }
+  transition-duration: 1s;
+}
 
 .mark {
   font-weight: bold;
@@ -14,19 +15,23 @@
   justify-content: center;
   align-items: center;
   background: #000000;
-  color: #fcfcfc; }
+  color: #fcfcfc;
+}
 
 .horizontal {
   grid-template-columns: repeat(8, 81px);
   margin-left: 41px;
   margin-top: 5px;
-  height: 27px; }
+  height: 27px;
+}
 
 .vertical {
   grid-template-rows: repeat(8, 81px);
   margin-right: 5px;
-  width: 27px; }
-  .vertical .mark {
-    width: 27px; }
+  width: 27px;
+}
+.vertical .mark {
+  width: 27px;
+}
 
 /*# sourceMappingURL=Marking.css.map */
