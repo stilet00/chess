@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Board.css";
 import { CellFields, COORDINATES } from "../../constants/constants";
 import Cell from "../Cell/Cell";
@@ -6,14 +6,17 @@ import TakenFigures from "../TakenFigures/TakenFigures";
 import { usePawls } from "../../hooks/usePawls";
 import { useKnights } from "../../hooks/useKnights";
 import Marking from "../Marking/Marking";
+import { getOppositeColor } from "../../hooks/useOppositeColor";
 function Board(props) {
   const [cells, setCells] = useState(CellFields);
   const [currentCell, setCurrentCell] = useState(null);
+  const [currentBackground, setCurrentBackground] = useState(null);
   const [takenFigures, setTakenFigures] = useState({
     white: [],
     black: [],
   });
   const [moveOrder, setMoveOrder] = useState("white");
+  const [victory, setVictory] = useState({status: false, winner: null})
   const [coordinates, setCoordinates] = useState(COORDINATES);
   const { pawlMoves } = usePawls(
     cells,
@@ -26,6 +29,12 @@ function Board(props) {
     coordinates,
     setCoordinates
   );
+  useEffect(() => {
+    if (!cells.filter(cell => cell.figure && cell.figure.color === moveOrder).length) {
+      setVictory({status: true, winner: getOppositeColor(moveOrder)})
+      alert(getOppositeColor(moveOrder) + " has WON!");
+    }
+  }, [cells])
   const { knightMoves } = useKnights(
     cells,
     setCells,
@@ -38,20 +47,25 @@ function Board(props) {
     setCoordinates
   );
   function dragStartHandler(e, id, figure) {
+    e.target.style.opacity = 0.5;
     if (figure.color === moveOrder) {
+      setCurrentBackground(e.target.parentNode.style.background)
       setCurrentCell(cells.find((item) => item.id === id));
     } else {
       e.preventDefault();
     }
   }
   function dragLeaveHandler(e) {
-    e.target.style.opacity = "1";
+    e.target.style.background = currentBackground;
   }
-  function dragEndHandler(e) {}
+  function dragEndHandler(e) {
+    e.target.style.opacity = 1;
+  }
 
   function dragOverHandler(e) {
     e.preventDefault();
-    e.target.style.opacity = "0.5";
+    setCurrentBackground(e.target.parentNode.style.background)
+    e.target.style.background = "lightblue";
   }
 
   function dragDropHandler(e) {
@@ -59,7 +73,8 @@ function Board(props) {
   }
   function onBoardDrop(e, id) {
     e.preventDefault();
-    e.target.style.opacity = "1";
+    e.target.style.opacity = 1;
+    e.target.style.background = currentBackground;
     if (currentCell.figure.name === "knight") {
       knightMoves(id, currentCell.figure.color);
     } else {
@@ -69,7 +84,7 @@ function Board(props) {
 
   return (
     <div className={"chess"}>
-      <h1>Current move: {moveOrder}</h1>
+      <h1>Current move: {!victory.status ? moveOrder : "GAME OVER"}</h1>
       <TakenFigures side={"white"} figures={takenFigures.white} />
       <div className="border">
         <Marking direction={"vertical"} inner={coordinates.numbers.reverse()} />
@@ -90,6 +105,7 @@ function Board(props) {
                 onDrop={dragDropHandler}
                 onBoardDrop={onBoardDrop}
                 moveOrder={moveOrder}
+                victory={victory}
               />
             );
           })}

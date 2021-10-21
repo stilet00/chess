@@ -12,6 +12,7 @@ function Cell({
   onDragOver,
   onDragLeave,
   moveOrder,
+  victory
 }) {
   let color;
   if (
@@ -42,7 +43,7 @@ function Cell({
     >
       <div
         className={
-          !!figure && figure.color === moveOrder
+          !!figure && figure.color === moveOrder && !victory.status
             ? "figure-place full"
             : "figure-place empty"
         }
