@@ -1,6 +1,12 @@
-import { getOppositeColor } from "../../../hooks/commonHooks";
+import {
+  getHorizontalLineCells,
+  getLeftDiagonalCheck,
+  getOppositeColor,
+  getRightDiagonalCells,
+  getVerticalLineCells,
+} from "../../../hooks/commonHooks";
 
-export function useKnights(
+export function useQueen(
   cells,
   setCells,
   currentCell,
@@ -11,23 +17,22 @@ export function useKnights(
   coordinates,
   setCoordinates
 ) {
-  function moveCheck(endCellID) {
+  function moveCheck(currentID, endCellID) {
+    const verticalArray = getVerticalLineCells(cells, currentID);
+    const horizontalArray = getHorizontalLineCells(cells, currentID);
+    const rightDiagonalArray = getRightDiagonalCells(cells, currentID);
     return (
-      endCellID === currentCell.id - 10 ||
-      endCellID === currentCell.id - 6 ||
-      endCellID === currentCell.id + 6 ||
-      endCellID === currentCell.id + 10 ||
-      endCellID === currentCell.id - 15 ||
-      endCellID === currentCell.id - 17 ||
-      endCellID === currentCell.id + 17 ||
-      endCellID === currentCell.id + 15
+      verticalArray.includes(endCellID) ||
+      horizontalArray.includes(endCellID) ||
+      rightDiagonalArray.includes(endCellID) ||
+      getLeftDiagonalCheck(currentID, endCellID)
     );
   }
-  function knightMoves(endCellID, color) {
+  function queenMoves(endCellID, color) {
     const figureOnLand = cells.find((item) => item.id === endCellID).figure;
     const oppositeColor = getOppositeColor(color);
     if (!figureOnLand) {
-      if (moveCheck(endCellID)) {
+      if (moveCheck(currentCell.id, endCellID)) {
         setMoveOrder(oppositeColor);
         setCoordinates({
           letters: coordinates.letters.reverse(),
@@ -70,8 +75,7 @@ export function useKnights(
       });
     }
   }
-
   return {
-    knightMoves,
+    queenMoves,
   };
 }

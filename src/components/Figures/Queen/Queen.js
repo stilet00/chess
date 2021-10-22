@@ -1,5 +1,5 @@
 import React from "react";
-import { getOppositeColor } from "../../../hooks/useOppositeColor";
+import { getOppositeColor } from "../../../hooks/commonHooks";
 
 function Queen({ color }) {
   const oppositeColor = getOppositeColor(color);

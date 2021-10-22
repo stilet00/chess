@@ -1,4 +1,4 @@
-import { getOppositeColor } from "../../../hooks/useOppositeColor";
+import { getOppositeColor } from "../../../hooks/commonHooks";
 
 export function usePawls(
   cells,

@@ -6,7 +6,8 @@ import TakenFigures from "../TakenFigures/TakenFigures";
 import { usePawls } from "../Figures/Pawn/usePawls";
 import { useKnights } from "../Figures/Knight/useKnights";
 import Marking from "../Marking/Marking";
-import { getOppositeColor } from "../../hooks/useOppositeColor";
+import { getOppositeColor } from "../../hooks/commonHooks";
+import { useQueen } from "../Figures/Queen/useQueen";
 function Board(props) {
   const [cells, setCells] = useState(CellFields);
   const [currentCell, setCurrentCell] = useState(null);
@@ -18,6 +19,27 @@ function Board(props) {
   const [moveOrder, setMoveOrder] = useState("white");
   const [victory, setVictory] = useState({ status: false, winner: null });
   const [coordinates, setCoordinates] = useState(COORDINATES);
+
+  useEffect(() => {
+    if (
+      !cells.filter((cell) => cell.figure && cell.figure.color === moveOrder)
+        .length
+    ) {
+      setVictory({ status: true, winner: getOppositeColor(moveOrder) });
+      alert(getOppositeColor(moveOrder) + " has WON!");
+    }
+  }, [cells]);
+  const { knightMoves } = useKnights(
+    cells,
+    setCells,
+    currentCell,
+    setCurrentCell,
+    setTakenFigures,
+    takenFigures,
+    setMoveOrder,
+    coordinates,
+    setCoordinates
+  );
   const { pawlMoves } = usePawls(
     cells,
     setCells,
@@ -29,16 +51,7 @@ function Board(props) {
     coordinates,
     setCoordinates
   );
-  useEffect(() => {
-    if (
-      !cells.filter((cell) => cell.figure && cell.figure.color === moveOrder)
-        .length
-    ) {
-      setVictory({ status: true, winner: getOppositeColor(moveOrder) });
-      alert(getOppositeColor(moveOrder) + " has WON!");
-    }
-  }, [cells]);
-  const { knightMoves } = useKnights(
+  const { queenMoves } = useQueen(
     cells,
     setCells,
     currentCell,
@@ -80,8 +93,10 @@ function Board(props) {
     e.target.style.background = currentBackground;
     if (currentCell.figure.name === "knight") {
       knightMoves(id, currentCell.figure.color);
-    } else {
+    } else if (currentCell.figure.name === "pawn") {
       pawlMoves(id, currentCell.figure.color);
+    } else {
+      queenMoves(id, currentCell.figure.color);
     }
   }
 
