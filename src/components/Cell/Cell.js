@@ -1,7 +1,8 @@
 import React from "react";
 import "./Cell.css";
-import Knight from "../FiguresImages/Knight/Knight";
-import Pawn from "../FiguresImages/Pawn/Pawn";
+import Knight from "../Figures/Knight/Knight";
+import Pawn from "../Figures/Pawn/Pawn";
+import Queen from "../Figures/Queen/Queen";
 function Cell({
   id,
   figure,
@@ -12,7 +13,7 @@ function Cell({
   onDragOver,
   onDragLeave,
   moveOrder,
-  victory
+  victory,
 }) {
   let color;
   if (
@@ -28,8 +29,10 @@ function Cell({
   let figureImage = figure ? (
     figure.name === "knight" ? (
       <Knight color={figure.color} />
-    ) : (
+    ) : figure.name === "pawn" ? (
       <Pawn color={figure.color} />
+    ) : (
+      <Queen color={figure.color} />
     )
   ) : null;
   return (

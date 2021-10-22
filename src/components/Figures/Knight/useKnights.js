@@ -1,4 +1,4 @@
-import { getOppositeColor } from "./useOppositeColor";
+import { getOppositeColor } from "../../../hooks/useOppositeColor";
 
 export function useKnights(
   cells,

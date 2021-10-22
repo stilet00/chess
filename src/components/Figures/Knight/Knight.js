@@ -1,16 +1,10 @@
 import React from "react";
 import { getOppositeColor } from "../../../hooks/useOppositeColor";
-import "./Knight.css";
 
 function Knight({ color }) {
   const oppositeColor = getOppositeColor(color);
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-      className={"svg-figure"}
-      viewBox={"0 0 45 45"}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox={"0 0 45 45"}>
       <g
         style={{
           opacity: "1",
