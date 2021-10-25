@@ -47,28 +47,9 @@ export function usePawls(
     if (figureOnLand) {
       if (figureOnLand.color !== color && attackCheck) {
         if (!queenTransformCheck) {
-          setCells(
-            cells.map((item) => {
-              return item.id === endCellID
-                ? {
-                    ...item,
-                    figure: { ...currentCell.figure, isTouched: true },
-                  }
-                : item.id === currentCell.id
-                ? { ...item, figure: null }
-                : item;
-            })
-          );
+          setFigure(currentCell.figure, endCellID);
         } else {
-          setCells(
-            cells.map((item) => {
-              return item.id === endCellID
-                ? { ...item, figure: { ...queen } }
-                : item.id === currentCell.id
-                ? { ...item, figure: null }
-                : item;
-            })
-          );
+          setFigure(queen, endCellID);
         }
 
         setTakenFigures({
@@ -90,25 +71,9 @@ export function usePawls(
         !cells.find((item) => item.id === moveCheck).figure)
     ) {
       if (!queenTransformCheck) {
-        setCells(
-          cells.map((item) => {
-            return item.id === endCellID
-              ? { ...item, figure: { ...currentCell.figure, isTouched: true } }
-              : item.id === currentCell.id
-              ? { ...item, figure: null }
-              : item;
-          })
-        );
+        setFigure(currentCell.figure, endCellID);
       } else {
-        setCells(
-          cells.map((item) => {
-            return item.id === endCellID
-              ? { ...item, figure: { ...queen } }
-              : item.id === currentCell.id
-              ? { ...item, figure: null }
-              : item;
-          })
-        );
+        setFigure(queen, endCellID);
       }
       setMoveOrder(oppositeColor);
       setCoordinates({
@@ -120,7 +85,17 @@ export function usePawls(
       setCurrentCell(null);
     }
   }
-
+  function setFigure(figure, endCellID) {
+    setCells(
+      cells.map((item) => {
+        return item.id === endCellID
+          ? { ...item, figure: { ...figure, isTouched: true } }
+          : item.id === currentCell.id
+          ? { ...item, figure: null }
+          : item;
+      })
+    );
+  }
   return {
     pawlMoves,
   };

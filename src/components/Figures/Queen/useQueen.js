@@ -54,7 +54,7 @@ export function useQueen(
     } else if (figureOnLand.color === color) {
       alert("Can't take");
       setCurrentCell(null);
-    } else {
+    } else if (moveCheck(currentCell.id, endCellID)) {
       setTakenFigures({
         ...takenFigures,
         [color]: [...takenFigures[color], figureOnLand],
@@ -73,6 +73,8 @@ export function useQueen(
         letters: coordinates.letters.reverse(),
         numbers: coordinates.numbers.reverse(),
       });
+    } else {
+      alert("Wrong move!");
     }
   }
   return {

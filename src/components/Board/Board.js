@@ -105,7 +105,7 @@ function Board(props) {
       <h1>Current move: {!victory.status ? moveOrder : "GAME OVER"}</h1>
       <TakenFigures side={"white"} figures={takenFigures.white} />
       <div className="border">
-        <Marking direction={"vertical"} inner={coordinates.numbers.reverse()} />
+        <Marking direction={"vertical"} marks={coordinates.numbers} />
         <div
           className={
             moveOrder === "white" ? "board static-board" : "board rotated-board"
@@ -128,7 +128,7 @@ function Board(props) {
             );
           })}
         </div>
-        <Marking direction={"horizontal"} inner={coordinates.letters} />
+        <Marking direction={"horizontal"} marks={coordinates.letters} />
       </div>
 
       <TakenFigures side={"black"} figures={takenFigures.black} />
