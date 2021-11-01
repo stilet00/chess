@@ -1,4 +1,5 @@
 import { getOppositeColor } from "../../../hooks/commonHooks";
+import { QUEEN, WHITE } from "../../../constants/constants";
 
 export function usePawls(
   cells,
@@ -15,18 +16,18 @@ export function usePawls(
     const figureOnLand = cells.find((item) => item.id === endCellID).figure;
     const oppositeColor = getOppositeColor(color);
     const attackCheck =
-      color === "white"
+      color === WHITE
         ? currentCell.id - 9 === endCellID || currentCell.id - 7 === endCellID
         : currentCell.id + 9 === endCellID || currentCell.id + 7 === endCellID;
     const moveCheck =
-      color === "white" ? currentCell.id - 8 : currentCell.id + 8;
+      color === WHITE ? currentCell.id - 8 : currentCell.id + 8;
     const bigMoveCheck =
-      color === "white"
+      color === WHITE
         ? currentCell.id - 16 === endCellID
         : currentCell.id + 16 === endCellID;
 
     const queenTransformCheck =
-      color === "white"
+      color === WHITE
         ? cells
             .map((item, index) => {
               if (index < 8) {
@@ -42,7 +43,7 @@ export function usePawls(
             })
             .includes(endCellID);
     const queen = queenTransformCheck
-      ? { ...currentCell.figure, name: "queen" }
+      ? { ...currentCell.figure, name: QUEEN }
       : null;
     if (figureOnLand) {
       if (figureOnLand.color !== color && attackCheck) {
