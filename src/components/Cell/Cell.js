@@ -3,7 +3,7 @@ import "./Cell.css";
 import Knight from "../Figures/Knight/Knight";
 import Pawn from "../Figures/Pawn/Pawn";
 import Queen from "../Figures/Queen/Queen";
-import { Transition } from "react-transition-group";
+import { Transition } from 'react-transition-group';
 import { BLACK, KNIGHT, PAWN } from "../../constants/constants";
 function Cell({
   id,
