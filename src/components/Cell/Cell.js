@@ -3,6 +3,8 @@ import "./Cell.css";
 import Knight from "../Figures/Knight/Knight";
 import Pawn from "../Figures/Pawn/Pawn";
 import Queen from "../Figures/Queen/Queen";
+import { Transition } from 'react-transition-group';
+import { BLACK, KNIGHT, PAWN } from "../../constants/constants";
 function Cell({
   id,
   figure,
@@ -15,6 +17,22 @@ function Cell({
   moveOrder,
   victory,
 }) {
+  const duration = 1000;
+
+  const defaultStyle = {
+    transition: `all ${duration}ms ease-in-out`,
+    opacity: 0,
+  };
+
+  const transitionStyles = {
+    entering: { opacity: 1 },
+    entered: {
+      opacity: 1,
+      transform: moveOrder === BLACK ? "rotate(180deg)" : "rotate(0deg)",
+    },
+    exiting: { opacity: 0 },
+    exited: { opacity: 0 },
+  };
   let color;
   if (
     id < 9 ||
@@ -27,14 +45,15 @@ function Cell({
     color = id % 2 ? "brown" : "grey";
   }
   let figureImage = figure ? (
-    figure.name === "knight" ? (
+    figure.name === KNIGHT ? (
       <Knight color={figure.color} />
-    ) : figure.name === "pawn" ? (
+    ) : figure.name === PAWN ? (
       <Pawn color={figure.color} />
     ) : (
       <Queen color={figure.color} />
     )
   ) : null;
+
   return (
     <div
       id={id}
@@ -44,20 +63,27 @@ function Cell({
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
     >
-      <div
-        className={
-          !!figure && figure.color === moveOrder && !victory.status
-            ? "figure-place full"
-            : "figure-place empty"
-        }
-        draggable={!!figure && figure.color === moveOrder}
-        onDragStart={(e) => onDragStart(e, id, figure)}
-        onDrop={(e) => onDrop(e)}
-        onDragEnd={onDragEnd}
-        style={moveOrder === "black" ? { transform: "rotate(180deg)" } : null}
-      >
-        {figureImage}
-      </div>
+      <Transition in={!!figure} timeout={duration}>
+        {(state) => (
+          <div
+            className={
+              !!figure && figure.color === moveOrder && !victory.status
+                ? "figure-place full"
+                : "figure-place empty"
+            }
+            style={{
+              ...defaultStyle,
+              ...transitionStyles[state],
+            }}
+            draggable={!!figure && figure.color === moveOrder}
+            onDragStart={(e) => onDragStart(e, id, figure)}
+            onDrop={(e) => onDrop(e)}
+            onDragEnd={onDragEnd}
+          >
+            {figureImage}
+          </div>
+        )}
+      </Transition>
     </div>
   );
 }
