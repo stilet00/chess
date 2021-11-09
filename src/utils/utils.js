@@ -1,6 +1,7 @@
 export function getOppositeColor(color) {
   return color === "white" ? "black" : "white";
 }
+
 export function getVerticalLineCells(cells, currentID) {
   return cells.map((cell) =>
     (cell.id < currentID && !((currentID - cell.id) % 8)) ||
@@ -9,6 +10,7 @@ export function getVerticalLineCells(cells, currentID) {
       : null
   );
 }
+
 export function getHorizontalLineCells(cells, currentID) {
   let horizontalArray = [];
   for (let i = 1; i <= 57 && !horizontalArray.length; i += 8) {
@@ -21,6 +23,7 @@ export function getHorizontalLineCells(cells, currentID) {
   }
   return horizontalArray;
 }
+
 export function getRightDiagonalCells(cells, currentID) {
   return cells.map((cell) =>
     (cell.id < currentID && !((currentID - cell.id) % 9)) ||
@@ -29,6 +32,7 @@ export function getRightDiagonalCells(cells, currentID) {
       : null
   );
 }
+
 export function getLeftDiagonalCheck(currentID, endCellID) {
   return (
     endCellID === currentID - 7 ||

@@ -14,7 +14,7 @@ function Cell({
   onDragEnd,
   onDragOver,
   onDragLeave,
-  moveOrder,
+  nextMove,
   victory,
 }) {
   const duration = 1000;
@@ -28,7 +28,7 @@ function Cell({
     entering: { opacity: 1 },
     entered: {
       opacity: 1,
-      transform: moveOrder === BLACK ? "rotate(180deg)" : "rotate(0deg)",
+      transform: nextMove === BLACK ? "rotate(180deg)" : "rotate(0deg)",
     },
     exiting: { opacity: 0 },
     exited: { opacity: 0 },
@@ -58,32 +58,47 @@ function Cell({
     <div
       id={id}
       style={{ background: color }}
-      className={"single-cell"}
+      className={"cell"}
       onDrop={(e) => onBoardDrop(e, id)}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
     >
-      <Transition in={!!figure} timeout={duration}>
-        {(state) => (
-          <div
-            className={
-              !!figure && figure.color === moveOrder && !victory.status
+      {/*<Transition in={!!figure} timeout={duration}>*/}
+      {/*  {(state) => (*/}
+      {/*    <div*/}
+      {/*      className={*/}
+      {/*        !!figure && figure.color === nextMove && !victory.status*/}
+      {/*          ? "figure-place full"*/}
+      {/*          : "figure-place empty"*/}
+      {/*      }*/}
+      {/*      style={{*/}
+      {/*        ...defaultStyle,*/}
+      {/*        // ...transitionStyles[state],*/}
+      {/*      }}*/}
+      {/*      draggable={!!figure && figure.color === nextMove}*/}
+      {/*      onDragStart={(e) => onDragStart(e, id, figure)}*/}
+      {/*      onDrop={(e) => onDrop(e)}*/}
+      {/*      onDragEnd={onDragEnd}*/}
+      {/*    >*/}
+      {/*      {figureImage}*/}
+      {/*    </div>*/}
+
+      <div
+          className={
+            !!figure && figure.color === nextMove && !victory.status
                 ? "figure-place full"
                 : "figure-place empty"
-            }
-            style={{
-              ...defaultStyle,
-              ...transitionStyles[state],
-            }}
-            draggable={!!figure && figure.color === moveOrder}
-            onDragStart={(e) => onDragStart(e, id, figure)}
-            onDrop={(e) => onDrop(e)}
-            onDragEnd={onDragEnd}
-          >
-            {figureImage}
-          </div>
-        )}
-      </Transition>
+          }
+          draggable={!!figure && figure.color === nextMove}
+          onDragStart={(e) => onDragStart(e, id, figure)}
+          onDrop={(e) => onDrop(e)}
+          onDragEnd={onDragEnd}
+          style={nextMove === BLACK ? { transform: "rotate(180deg)" } : { transform: "rotate(360deg)" }}
+      >
+        {figureImage}
+      </div>
+      {/*  )}*/}
+      {/*</Transition>*/}
     </div>
   );
 }

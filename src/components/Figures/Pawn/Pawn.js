@@ -1,5 +1,5 @@
 import React from "react";
-import { getOppositeColor } from "../../../hooks/commonHooks";
+import { getOppositeColor } from "../../../utils/utils";
 
 function Pawn({ color }) {
   const oppositeColor = getOppositeColor(color);
