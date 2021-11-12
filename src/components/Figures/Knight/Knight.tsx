@@ -1,7 +1,7 @@
 import React from "react";
 import { getOppositeColor } from "../../../utils/utils";
 
-function Knight({ color }) {
+function Knight({ color }: any) {
   const oppositeColor = getOppositeColor(color);
   return (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox={"0 0 45 45"}>
@@ -9,15 +9,15 @@ function Knight({ color }) {
         style={{
           opacity: "1",
           fill: "none",
-          fillOpacity: "1",
+          fillOpacity: 1,
           fillRule: "evenodd",
           stroke: "#000000",
           strokeWidth: "1.5",
           strokeLinecap: "round",
           strokeLinejoin: "round",
-          strokeMiterlimit: "4",
+          strokeMiterlimit: 4,
           strokeDasharray: "none",
-          strokeOpacity: "1",
+          strokeOpacity: 1,
         }}
       >
         <path

@@ -1,13 +1,15 @@
+import { CellField, Coordinates } from "../interfaces/interfaces";
+
 //colors
-export const WHITE = "white";
-export const BLACK = "black";
+export const WHITE: string = "white";
+export const BLACK: string = "black";
 
 //figures
-export const KNIGHT = "knight";
-export const QUEEN = "queen";
-export const PAWN = "pawn";
+export const KNIGHT: string = "knight";
+export const QUEEN: string = "queen";
+export const PAWN: string = "pawn";
 
-export const CellFields = [
+export const CellFields: CellField = [
   { id: 1, figure: null },
   { id: 2, figure: null },
   { id: 3, figure: null },
@@ -73,7 +75,7 @@ export const CellFields = [
   { id: 63, figure: null },
   { id: 64, figure: null },
 ];
-export const COORDINATES = {
+export const COORDINATES: Coordinates = {
   letters: ["a", "b", "c", "d", "e", "f", "g", "h"],
   numbers: ["8", "7", "6", "5", "4", "3", "2", "1"],
 };

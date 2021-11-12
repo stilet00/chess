@@ -1,6 +1,6 @@
 import React from "react";
 
-function Queen({ color }) {
+function Queen({ color }: any) {
   return (
     <svg
       version="1.0"
