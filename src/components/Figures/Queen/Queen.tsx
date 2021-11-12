@@ -1,8 +1,6 @@
 import React from "react";
-import { getOppositeColor } from "../../../hooks/commonHooks";
 
-function Queen({ color }) {
-  const oppositeColor = getOppositeColor(color);
+function Queen({ color }: any) {
   return (
     <svg
       version="1.0"
